@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCollectionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCollectionLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{collectionController.selected.id}" title="#{bundle.CreateCollectionTitle_id}" required="true" requiredMessage="#{bundle.CreateCollectionRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateCollectionLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{collectionController.selected.name}" title="#{bundle.CreateCollectionTitle_name}" required="true" requiredMessage="#{bundle.CreateCollectionRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.CreateCollectionLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{collectionController.selected.userId}" title="#{bundle.CreateCollectionTitle_userId}" required="true" requiredMessage="#{bundle.CreateCollectionRequiredMessage_userId}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{collectionController.create}" value="#{bundle.CreateCollectionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{collectionController.prepareList}" value="#{bundle.CreateCollectionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCollectionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
