@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateImageLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{imageController.selected.id}" title="#{bundle.CreateImageTitle_id}" required="true" requiredMessage="#{bundle.CreateImageRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreateImageLabel_fileName}" for="fileName" />
                     <h:inputText id="fileName" value="#{imageController.selected.fileName}" title="#{bundle.CreateImageTitle_fileName}" required="true" requiredMessage="#{bundle.CreateImageRequiredMessage_fileName}"/>
                     <h:outputLabel value="#{bundle.CreateImageLabel_description}" for="description" />
