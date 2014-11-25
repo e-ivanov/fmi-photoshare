@@ -25,6 +25,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -101,6 +102,7 @@ public class Image implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<Category> getCategoryCollection() {
         return categoryCollection;
     }
@@ -110,6 +112,7 @@ public class Image implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<com.photoshare.fmi.photoshare.entity.Collection> getCollectionCollection() {
         return collectionCollection;
     }
@@ -118,6 +121,7 @@ public class Image implements Serializable {
         this.collectionCollection = collectionCollection;
     }
 
+    @JsonIgnore
     public User getUserId() {
         return userId;
     }

@@ -66,7 +66,7 @@ public class UserFacadeREST {
     }
 
     @GET
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<User> findAll() {
         //return super.findAll();
         return userFacade.findAll();

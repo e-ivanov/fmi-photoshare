@@ -67,7 +67,7 @@ public class ImageFacadeREST  {
     }
 
     @GET
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<Image> findAll() {
         //return super.findAll();
         return imageFacade.findAll();
