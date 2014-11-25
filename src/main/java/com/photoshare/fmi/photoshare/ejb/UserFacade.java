@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author killer
  */
 @Stateless
-public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
+public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal{
     @PersistenceContext(unitName = "com.photoshare.fmi_photoshare_war_1.0PU")
     private EntityManager em;
 

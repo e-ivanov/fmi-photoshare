@@ -1,6 +1,5 @@
 package com.photoshare.fmi.photoshare.mbeans;
 
-import com.photoshare.fmi.photoshare.ejb.ImageFacade;
 import com.photoshare.fmi.photoshare.ejb.ImageFacadeLocal;
 import com.photoshare.fmi.photoshare.entity.Image;
 import com.photoshare.fmi.photoshare.mbeans.util.JsfUtil;
