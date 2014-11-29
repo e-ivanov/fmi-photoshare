@@ -93,6 +93,7 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @JsonIgnore
     public Integer getId() {
         return id;
     }

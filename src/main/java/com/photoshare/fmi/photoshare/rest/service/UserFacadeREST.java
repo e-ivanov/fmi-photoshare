@@ -37,7 +37,8 @@ public class UserFacadeREST {
     
 
     @POST
-    @Consumes({"application/xml", "application/json"})
+    @Path("create")
+    @Consumes({"application/json"})
     public void create(User entity) {
         userFacade.create(entity);
     }
