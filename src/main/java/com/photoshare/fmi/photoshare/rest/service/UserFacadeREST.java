@@ -9,6 +9,7 @@ package com.photoshare.fmi.photoshare.rest.service;
 import com.photoshare.fmi.photoshare.ejb.UserFacadeLocal;
 import com.photoshare.fmi.photoshare.entity.User;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

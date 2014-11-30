@@ -7,6 +7,8 @@
 package com.photoshare.fmi.photoshare.ejb;
 
 import com.photoshare.fmi.photoshare.entity.User;
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,13 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal{
     public UserFacade() {
         super(User.class);
     }
+
+    @RolesAllowed("admin")
+    @Override
+    public List<User> findAll() {
+        return super.findAll(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }

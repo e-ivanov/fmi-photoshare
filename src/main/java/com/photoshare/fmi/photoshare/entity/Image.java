@@ -77,7 +77,6 @@ public class Image implements Serializable {
         this.fileName = fileName;
     }
 
-    @JsonIgnore
     public Integer getId() {
         return id;
     }
