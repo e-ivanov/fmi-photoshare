@@ -41,6 +41,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
 @XmlRootElement
 public class User implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<UserRoles> userRolesCollection;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -193,6 +195,16 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public Collection<UserRoles> getUserRolesCollection() {
+        return userRolesCollection;
+    }
+
+    public void setUserRolesCollection(Collection<UserRoles> userRolesCollection) {
+        this.userRolesCollection = userRolesCollection;
     }
     
 }
