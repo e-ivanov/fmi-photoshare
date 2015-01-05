@@ -4,28 +4,16 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>faces/pages/image/List.xhtml</welcome-file>
-    </welcome-file-list>
     
-  <security-constraint>
+    <security-constraint>
         <web-resource-collection>
-            <web-resource-name>photoshare</web-resource-name>
-            <url-pattern>/faces/user/*</url-pattern>
+            <web-resource-name>photoshare_rest</web-resource-name>
+            <url-pattern>/rest/*</url-pattern>
             <http-method>PUT</http-method>
             <http-method>DELETE</http-method>
             <http-method>GET</http-method>
@@ -35,14 +23,18 @@
             <role-name>user</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>photoshare_usercreate</web-resource-name>
+            <url-pattern>/rest/user/create</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
     <security-role>
         <role-name>user</role-name>
     </security-role>
     <login-config>
-    <auth-method>FORM</auth-method>
-    <form-login-config>
-        <form-login-page>/login.xhtml</form-login-page>
-        <form-error-page>/error.xhtml</form-error-page>
-    </form-login-config>
-</login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>Test realm</realm-name>
+    </login-config>
+
 </web-app>

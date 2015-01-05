@@ -9,6 +9,7 @@ package com.photoshare.fmi.photoshare.rest.service;
 import com.photoshare.fmi.photoshare.ejb.ImageFacadeLocal;
 import com.photoshare.fmi.photoshare.ejb.UserFacadeLocal;
 import com.photoshare.fmi.photoshare.entity.Image;
+import com.photoshare.fmi.photoshare.entity.User;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,6 +29,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
@@ -41,6 +44,8 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 public class ImageFacadeREST  {
     @PersistenceContext(unitName = "com.photoshare.fmi_photoshare_war_1.0PU")
     private EntityManager em;
+    
+    @Context HttpServletRequest request;
     
     @EJB
     private ImageFacadeLocal imageFacade;
@@ -59,16 +64,16 @@ public class ImageFacadeREST  {
         Map<String, List<InputPart>> uploadForm = form.getFormDataMap();
         
         String fileName;
-        Integer userId;
+        String username;
         String description;
         
         try {
             fileName = uploadForm.get("fileName").get(0).getBodyAsString();
-            userId = Integer.valueOf(uploadForm.get("userId").get(0).getBodyAsString());
+            username = request.getUserPrincipal().getName();
             description = uploadForm.get("description").get(0).getBodyAsString();
             Image entity = new Image();
             entity.setDescription(description);
-            entity.setUserId(userFacade.find(userId));
+            entity.setUserId(userFacade.findUserByUserName(username));
             entity.setFileName(fileName);
             
             imageFacade.create(entity);
@@ -109,7 +114,7 @@ public class ImageFacadeREST  {
     @Path("test")
     public String getstr(){
         
-        return "Ping";
+        return "pingg";
     }
     
     private void writeFile(byte[] content, String filename) throws IOException
@@ -124,20 +129,7 @@ public class ImageFacadeREST  {
         fop.close();
     }
 
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        //super.remove(super.find(id));
-        imageFacade.remove(imageFacade.find(id));
-    }
-
-    @GET
-    @Path("{id}")
-    @Produces({"application/xml", "application/json"})
-    public Image find(@PathParam("id") Integer id) {
-       // return super.find(id);
-        return imageFacade.find(id);
-    }
+   
 
     @GET
     @Produces({"application/json"})
@@ -146,13 +138,6 @@ public class ImageFacadeREST  {
         return imageFacade.findAll();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Image> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        //return super.findRange(new int[]{from, to});
-        return imageFacade.findRange(new int[]{from, to});
-    }
 
     @GET
     @Path("count")

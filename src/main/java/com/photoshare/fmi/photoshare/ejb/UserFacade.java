@@ -13,6 +13,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.picketlink.idm.credential.util.BCrypt;
 
 
@@ -40,16 +41,15 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal{
         return super.findAll(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void edit(User entity) {
+    
+    public User findUserByUserName(String username){
+        EntityManager em = getEntityManager();
+        User u = (User)em.createNamedQuery("User.findByUsername").setParameter("username", username).getSingleResult();
         
-        String hashedPassword = BCrypt.hashpw(entity.getPassword(), BCrypt.gensalt(12));
-        entity.setPassword(hashedPassword);
-        getEntityManager().merge(entity);
+        return u;
     }
     
-    
-    
+   
 
     @Override
     public void create(User entity) {
