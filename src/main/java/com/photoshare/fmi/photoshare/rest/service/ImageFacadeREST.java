@@ -74,7 +74,7 @@ public class ImageFacadeREST  {
             Image entity = new Image();
             entity.setDescription(description);
             entity.setUserId(userFacade.findUserByUserName(username));
-            entity.setFileName(fileName);
+            entity.setFileName(FILE_PATH+fileName);
             
             imageFacade.create(entity);
             
