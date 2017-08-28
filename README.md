@@ -1,4 +1,4 @@
 fmi-photoshare
 ==============
 
-A sample project for the course "Integration of distributed systems"
+A course project for the course "Integration of distributed systems"
